@@ -1,0 +1,20 @@
+# handl manifest for the `lib-cli-gen` repo: generated SDKs for
+# git/docker/ffmpeg/kubectl/aws. The `cli`/`cli-c` spawn contract +
+# backend come from the sibling lib-cli repo; the per-tool port and
+# adapter modules resolve out of `generated/` (gitignored — rebuilt
+# from `specs/*.clispec.yaml` by `hnl sdkgen cli` on demand).
+
+[dependencies]
+cli = { path = "../lib-cli/src/cli" }
+cli-c = { path = "../lib-cli/src/cli-c" }
+
+aws = { path = "generated/aws" }
+aws-cli-host = { path = "generated/aws-cli-host" }
+docker = { path = "generated/docker" }
+docker-cli-host = { path = "generated/docker-cli-host" }
+ffmpeg = { path = "generated/ffmpeg" }
+ffmpeg-cli-host = { path = "generated/ffmpeg-cli-host" }
+git = { path = "generated/git" }
+git-cli-host = { path = "generated/git-cli-host" }
+kubectl = { path = "generated/kubectl" }
+kubectl-cli-host = { path = "generated/kubectl-cli-host" }

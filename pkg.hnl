@@ -1,0 +1,9 @@
+--- lib-cli-gen -- generated SDKs for CLIs that ship only a binary.
+---
+--- Each tool pairs a `generated/<tool>` port (types + arrow
+--- signatures) with a `generated/<tool>-cli-host` adapter over
+--- `lib-cli`'s `cli-c` (posix_spawnp, no shell). Committed source is
+--- `specs/*.clispec.yaml` + `src/*.test.hnl`; `generated/` is a
+--- gitignored build artifact — `scripts/hnl-gate.sh` regenerates it
+--- via `hnl sdkgen cli` before gating.
+{ modules: ["aws", "aws-cli-host", "docker", "docker-cli-host", "ffmpeg", "ffmpeg-cli-host", "git", "git-cli-host", "kubectl", "kubectl-cli-host"] }

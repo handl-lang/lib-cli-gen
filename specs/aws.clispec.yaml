@@ -1,0 +1,85 @@
+# aws SDK spec — CORRECTED BASELINE (hand-authored)
+# Probe verdict: low-confidence garbage — `aws help` (v2) emits groff
+# man-page format with services listed as `* <svc>` bullets; nothing the
+# cobra/clap parser keys on, so probing found zero commands and zero
+# options. AWS's real shape is `aws <service> <operation> [parameters]`
+# (~300 services x thousands of operations — unprobeable one op per
+# man page). Authored as a root leaf: global options + a `rest` tail
+# carrying `<service> <operation> [params]` so every operation is still
+# reachable (e.g. aws({}, ["s3", "ls"]) -> `aws s3 ls`). Grow `commands:`
+# per-service as needed.
+name: aws
+about: AWS Command Line Interface — unified tool to manage AWS services
+options:
+  version:
+    flag: --version
+    kind: flag
+    doc: Display the version of this tool
+  help:
+    flag: --help
+    kind: flag
+    doc: Show the help page for the command
+  debug:
+    flag: --debug
+    kind: flag
+    doc: Turn on debug logging
+  endpoint_url:
+    flag: --endpoint-url
+    kind: string
+    doc: Override the command's default URL
+  no_verify_ssl:
+    flag: --no-verify-ssl
+    kind: flag
+    doc: Do not verify SSL certificates
+  no_paginate:
+    flag: --no-paginate
+    kind: flag
+    doc: Disable automatic pagination
+  output:
+    flag: --output
+    kind: string
+    doc: Output format — json|text|table|yaml|yaml-stream
+  query:
+    flag: --query
+    kind: string
+    doc: JMESPath query for filtering the response
+  profile:
+    flag: --profile
+    kind: string
+    doc: Profile from the credential file
+  region:
+    flag: --region
+    kind: string
+    doc: Region override (config/env default otherwise)
+  color:
+    flag: --color
+    kind: string
+    doc: Color output — on|off|auto
+  no_sign_request:
+    flag: --no-sign-request
+    kind: flag
+    doc: Do not sign requests (no credentials loaded)
+  ca_bundle:
+    flag: --ca-bundle
+    kind: string
+    doc: CA bundle path for SSL verification
+  cli_read_timeout:
+    flag: --cli-read-timeout
+    kind: int
+    doc: Socket read timeout in seconds (0 = blocking)
+  cli_connect_timeout:
+    flag: --cli-connect-timeout
+    kind: int
+    doc: Socket connect timeout in seconds (0 = blocking)
+  cli_binary_format:
+    flag: --cli-binary-format
+    kind: string
+    doc: Binary blob format — base64|raw-in-base64-out
+  no_cli_pager:
+    flag: --no-cli-pager
+    kind: flag
+    doc: Disable the CLI pager
+rest:
+  name: parameters
+  kind: string
+  doc: "<command> <subcommand> [parameters] — service, operation, params"

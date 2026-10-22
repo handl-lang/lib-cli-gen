@@ -1,0 +1,4 @@
+from "generated/ffmpeg-cli-host/ffmpeg" import * as m
+
+--- smoke: `ffmpeg -version` — flat tool, root leaf takes (opts, args).
+test_version := assert tag.untag(m.ffmpeg({ version: true }, [])).value.code = 0

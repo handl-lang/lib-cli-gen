@@ -1,0 +1,102 @@
+# ffmpeg SDK spec — CORRECTED BASELINE (hand-authored)
+# Probe verdict: low-confidence garbage — `ffmpeg -h` usage groups
+# (`[infile options] ... [outfile options] outfile`) were misparsed as a
+# nested `outfile` command tree. ffmpeg is a flat tool: single-dash long
+# options + free-form argv tail. Authored as a root leaf with the common
+# global options and a `rest` passthrough so the full option surface
+# stays reachable.
+name: ffmpeg
+about: FFmpeg video/audio converter — record, convert and stream audio and video
+options:
+  version:
+    flag: -version
+    kind: flag
+    doc: show version
+  hide_banner:
+    flag: -hide_banner
+    kind: flag
+    doc: suppress printing banner
+  y:
+    flag: "-y"
+    kind: flag
+    doc: overwrite output files without asking
+  n:
+    flag: "-n"
+    kind: flag
+    doc: never overwrite output files
+  loglevel:
+    flag: -loglevel
+    kind: string
+    doc: set logging level — quiet|panic|fatal|error|warning|info|verbose|debug|trace
+  stats:
+    flag: -stats
+    kind: flag
+    doc: print progress report during encoding
+  nostdin:
+    flag: -nostdin
+    kind: flag
+    doc: disable interaction on standard input
+  i:
+    flag: -i
+    kind: strings
+    doc: input file url (repeatable)
+  formats:
+    flag: -formats
+    kind: flag
+    doc: show available formats (muxers + demuxers)
+  muxers:
+    flag: -muxers
+    kind: flag
+    doc: show available muxers
+  demuxers:
+    flag: -demuxers
+    kind: flag
+    doc: show available demuxers
+  devices:
+    flag: -devices
+    kind: flag
+    doc: show available devices
+  codecs:
+    flag: -codecs
+    kind: flag
+    doc: show available codecs
+  encoders:
+    flag: -encoders
+    kind: flag
+    doc: show available encoders
+  decoders:
+    flag: -decoders
+    kind: flag
+    doc: show available decoders
+  filters:
+    flag: -filters
+    kind: flag
+    doc: show available filters
+  protocols:
+    flag: -protocols
+    kind: flag
+    doc: show available protocols
+  pix_fmts:
+    flag: -pix_fmts
+    kind: flag
+    doc: show available pixel formats
+  sample_fmts:
+    flag: -sample_fmts
+    kind: flag
+    doc: show available audio sample formats
+  layouts:
+    flag: -layouts
+    kind: flag
+    doc: show standard channel layouts
+  buildconf:
+    flag: -buildconf
+    kind: flag
+    doc: show build configuration
+  hwaccels:
+    flag: -hwaccels
+    kind: flag
+    doc: show available hardware acceleration methods
+rest:
+  name: args
+  kind: string
+  doc: remaining argv passed through verbatim (per-stream options, outfiles)

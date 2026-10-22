@@ -1,0 +1,1057 @@
+# kubectl SDK spec — probe-emitted baseline (`max_depth: 2`), hand-patched.
+# Probe needed `drop: [create.cronjob, get, set.resources]` — those usage
+# lines parse to invalid empty positionals; all three are re-authored
+# below (marked `# hand-authored`). `version.client` kind corrected
+# string -> flag. Positional extraction elsewhere is rough (option tokens
+# like `f`/`l` leak into `positionals:`) — tune per-command as needed.
+name: kubectl
+commands:
+  annotate:
+    about: Update the annotations on a resource
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+    - name: key_1_val_1
+      kind: string
+    - name: key_n_val_n
+      kind: string
+  api-resources:
+    about: Print the supported API resources on the server
+    options:
+      api_group:
+        flag: --api-group
+        kind: string
+  api-versions:
+    about: Print the supported API versions on the server, in the form of "group/version"
+  apply:
+    about: Apply a configuration to a resource by file name or stdin
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: directory
+      kind: string
+    commands:
+      edit-last-applied:
+        about: Edit latest last-applied-configuration annotations of a resource/object
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: resource_name
+          kind: string
+        - name: filename
+          kind: string
+      set-last-applied:
+        about: Set the last-applied-configuration annotation on a live object to match the contents of a file
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: filename
+          kind: string
+      view-last-applied:
+        about: View the latest last-applied-configuration annotations of a resource/object
+        options:
+          all:
+            flag: --all
+            kind: string
+        positionals:
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: label
+          kind: string
+        - name: type_name
+          kind: string
+        - name: filename
+          kind: string
+  attach:
+    about: Attach to a running container
+    options:
+      container:
+        flag: --container
+        kind: string
+    positionals:
+    - name: pod
+      kind: string
+    - name: type_name
+      kind: string
+    - name: container
+      kind: string
+  auth:
+    about: Inspect authorization
+    commands:
+      can-i:
+        about: Check whether an action is allowed
+        options:
+          all_namespaces:
+            flag: --all-namespaces
+            kind: string
+        positionals:
+        - name: verb
+          kind: string
+        - name: type
+          kind: string
+        - name: type_name
+          kind: string
+        - name: nonresourceurl
+          kind: string
+      reconcile:
+        about: Reconciles rules for RBAC role, role binding, cluster role, and cluster role binding objects
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: filename
+          kind: string
+      whoami:
+        about: 'Experimental: Check self subject attributes'
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+  autoscale:
+    about: Auto-scale a deployment, replica set, stateful set, or replication controller
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+    - name: type_name
+      kind: string
+  certificate:
+    about: Modify certificate resources
+    commands:
+      approve:
+        about: Approve a certificate signing request
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: f
+          kind: string
+        - name: filename
+          kind: string
+        - name: name
+          kind: string
+      deny:
+        about: Deny a certificate signing request
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: f
+          kind: string
+        - name: filename
+          kind: string
+        - name: name
+          kind: string
+  cluster-info:
+    about: Display cluster information
+    commands:
+      dump:
+        about: Dump relevant information for debugging and diagnosis
+        options:
+          all_namespaces:
+            flag: --all-namespaces
+            kind: string
+  completion:
+    about: Output shell completion code for the specified shell (bash, zsh, fish, or powershell)
+    positionals:
+    - name: shell
+      kind: string
+  config:
+    about: Modify kubeconfig files
+    commands:
+      current-context:
+        about: Display the current-context
+      delete-cluster:
+        about: Delete the specified cluster from the kubeconfig
+        positionals:
+        - name: name
+          kind: string
+      delete-context:
+        about: Delete the specified context from the kubeconfig
+        positionals:
+        - name: name
+          kind: string
+      delete-user:
+        about: Delete the specified user from the kubeconfig
+        positionals:
+        - name: name
+          kind: string
+      get-clusters:
+        about: Display clusters defined in the kubeconfig
+      get-contexts:
+        about: Describe one or many contexts
+        options:
+          no_headers:
+            flag: --no-headers
+            kind: string
+      get-users:
+        about: Display users defined in the kubeconfig
+      rename-context:
+        about: Rename a context from the kubeconfig file
+        positionals:
+        - name: context_name
+          kind: string
+        - name: new_name
+          kind: string
+      set:
+        about: Set an individual value in a kubeconfig file
+        options:
+          set_raw_bytes:
+            flag: --set-raw-bytes
+            kind: string
+        positionals:
+        - name: property_name
+          kind: string
+        - name: property_value
+          kind: string
+      set-cluster:
+        about: Set a cluster entry in kubeconfig
+        options:
+          certificate_authority:
+            flag: --certificate-authority
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      set-context:
+        about: Set a context entry in kubeconfig
+        options:
+          cluster:
+            flag: --cluster
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      set-credentials:
+        about: Set a user entry in kubeconfig
+        options:
+          auth_provider:
+            flag: --auth-provider
+            kind: string
+          client_certificate:
+            flag: --client-certificate
+            kind: string
+          token:
+            flag: --token
+            kind: string
+          username:
+            flag: --username
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      unset:
+        about: Unset an individual value in a kubeconfig file
+        positionals:
+        - name: property_name
+          kind: string
+      use-context:
+        about: Set the current-context in a kubeconfig file
+        positionals:
+        - name: context_name
+          kind: string
+      view:
+        about: Display merged kubeconfig settings or a specified kubeconfig file
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+  cordon:
+    about: Mark node as unschedulable
+    options:
+      dry_run:
+        flag: --dry-run
+        kind: string
+    positionals:
+    - name: node
+      kind: string
+  cp:
+    about: Copy files and directories to and from containers
+    options:
+      container:
+        flag: --container
+        kind: string
+    positionals:
+    - name: file_spec_src
+      kind: string
+    - name: file_spec_dest
+      kind: string
+  create:
+    about: Create a resource from a file or from stdin
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: filename
+      kind: string
+    commands:
+      clusterrole:
+        about: Create a cluster role
+        options:
+          aggregation_rule:
+            flag: --aggregation-rule
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      clusterrolebinding:
+        about: Create a cluster role binding for a particular cluster role
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      configmap:
+        about: Create a config map from a local file, directory or literal value
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      # hand-authored — probe parse of the usage line was invalid
+      # (`-- [COMMAND] [args...]` tail), config-dropped then re-authored.
+      cronjob:
+        about: Create a cron job with the specified name
+        options:
+          image:
+            flag: --image
+            kind: string
+            doc: Image name to run
+          schedule:
+            flag: --schedule
+            kind: string
+            doc: Cron schedule, e.g. "*/1 * * * *"
+          restart:
+            flag: --restart
+            kind: string
+            doc: Job restart policy — Always|OnFailure|Never
+          dry_run:
+            flag: --dry-run
+            kind: string
+            doc: none|server|client
+          output:
+            flag: --output
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      deployment:
+        about: Create a deployment with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      ingress:
+        about: Create an ingress with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      job:
+        about: Create a job with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      namespace:
+        about: Create a namespace with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      poddisruptionbudget:
+        about: Create a pod disruption budget with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      priorityclass:
+        about: Create a priority class with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      quota:
+        about: Create a quota with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      role:
+        about: Create a role with single rule
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      rolebinding:
+        about: Create a role binding for a particular role or cluster role
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      secret:
+        about: Create a secret using a specified subcommand
+        positionals:
+        - name: docker_registry
+          kind: string
+        - name: generic
+          kind: string
+        - name: tls
+          kind: string
+        commands:
+          docker-registry:
+            about: Create a secret for use with a Docker registry
+          generic:
+            about: Create a secret from a local file, directory, or literal value
+          tls:
+            about: Create a TLS secret
+      service:
+        about: Create a service using a specified subcommand
+        commands:
+          clusterip:
+            about: Create a ClusterIP service
+          externalname:
+            about: Create an ExternalName service
+          loadbalancer:
+            about: Create a LoadBalancer service
+          nodeport:
+            about: Create a NodePort service
+      serviceaccount:
+        about: Create a service account with the specified name
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+      token:
+        about: Request a service account token
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: service_account_name
+          kind: string
+  debug:
+    about: Create debugging sessions for troubleshooting workloads and nodes
+    options:
+      arguments_only:
+        flag: --arguments-only
+        kind: string
+    positionals:
+    - name: pod
+      kind: string
+    - name: type_version_group_name
+      kind: string
+  delete:
+    about: Delete resources by file names, stdin, resources and names, or by resources and label selector
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+    - name: label
+      kind: string
+  describe:
+    about: Show details of a specific resource or group of resources
+    options:
+      all_namespaces:
+        flag: --all-namespaces
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name_prefix
+      kind: string
+    - name: label
+      kind: string
+    - name: type_name
+      kind: string
+  diff:
+    about: Diff the live version against a would-be applied version
+    options:
+      concurrency:
+        flag: --concurrency
+        kind: string
+    positionals:
+    - name: filename
+      kind: string
+  drain:
+    about: Drain node in preparation for maintenance
+    options:
+      chunk_size:
+        flag: --chunk-size
+        kind: string
+    positionals:
+    - name: node
+      kind: string
+  edit:
+    about: Edit a resource on the server
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: resource_name
+      kind: string
+    - name: filename
+      kind: string
+  events:
+    about: List events
+    options:
+      all_namespaces:
+        flag: --all-namespaces
+        kind: string
+  exec:
+    about: Execute a command in a container
+    options:
+      container:
+        flag: --container
+        kind: string
+    positionals:
+    - name: pod
+      kind: string
+    - name: type_name
+      kind: string
+  explain:
+    about: Get documentation for a resource
+    options:
+      api_version:
+        flag: --api-version
+        kind: string
+    positionals:
+    - name: type
+      kind: string
+  expose:
+    about: Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+  # hand-authored — the probe's parse of `kubectl get`'s usage line
+  # ([(-o|--output=)json|yaml|...] groups) yielded an empty positional
+  # name, so `get` was config-dropped and re-authored here.
+  get:
+    about: Display one or many resources
+    options:
+      output:
+        flag: --output
+        kind: string
+        doc: Output format — json|yaml|kyaml|name|wide|custom-columns=...|go-template=... (-o)
+      watch:
+        flag: --watch
+        kind: flag
+        doc: Watch for changes after listing (-w)
+      selector:
+        flag: --selector
+        kind: string
+        doc: Label selector (-l)
+      all_namespaces:
+        flag: --all-namespaces
+        kind: flag
+        doc: List across all namespaces (-A)
+      field_selector:
+        flag: --field-selector
+        kind: string
+      show_labels:
+        flag: --show-labels
+        kind: flag
+      no_headers:
+        flag: --no-headers
+        kind: flag
+      chunk_size:
+        flag: --chunk-size
+        kind: int
+      server_print:
+        flag: --server-print
+        kind: flag
+    positionals:
+    - name: resource
+      kind: string
+      doc: TYPE[.VERSION][.GROUP] or TYPE[.VERSION][.GROUP]/NAME
+    rest:
+      name: names
+      kind: string
+      doc: resource NAME(s) or extra args
+  kuberc:
+    about: Manage kuberc configuration files
+    commands:
+      set:
+        about: Set values in the kuberc configuration
+        options:
+          allowlist_entry:
+            flag: --allowlist-entry
+            kind: string
+      view:
+        about: Display the current kuberc configuration
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+  kustomize:
+    about: Build a kustomization target from a directory or URL
+    options:
+      as_current_user:
+        flag: --as-current-user
+        kind: string
+    positionals:
+    - name: dir
+      kind: string
+  label:
+    about: Update the labels on a resource
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+    - name: key_1_val_1
+      kind: string
+    - name: key_n_val_n
+      kind: string
+  logs:
+    about: Print the logs for a container in a pod
+    options:
+      all_containers:
+        flag: --all-containers
+        kind: string
+    positionals:
+    - name: pod
+      kind: string
+    - name: type_name
+      kind: string
+  patch:
+    about: Update fields of a resource
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+  plugin:
+    about: Provides utilities for interacting with plugins
+    commands:
+      list:
+        about: List all visible plugin executables on a user's PATH
+        options:
+          name_only:
+            flag: --name-only
+            kind: string
+  port-forward:
+    about: Forward one or more local ports to a pod
+    options:
+      address:
+        flag: --address
+        kind: string
+    positionals:
+    - name: type_name
+      kind: string
+    - name: local_port_remote_port
+      kind: string
+    rest:
+      name: local_port_n_remote_port_n
+      kind: string
+  proxy:
+    about: Run a proxy to the Kubernetes API server
+    options:
+      accept_hosts:
+        flag: --accept-hosts
+        kind: string
+  replace:
+    about: Replace a resource by file name or stdin
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: filename
+      kind: string
+  rollout:
+    about: Manage the rollout of a resource
+    commands:
+      history:
+        about: View rollout history
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: type_name
+          kind: string
+      pause:
+        about: Mark the provided resource as paused
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: resource
+          kind: string
+      restart:
+        about: Restart a resource
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: resource
+          kind: string
+      resume:
+        about: Resume a paused resource
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: resource
+          kind: string
+      status:
+        about: Show the status of the rollout
+        options:
+          filename:
+            flag: --filename
+            kind: string
+        positionals:
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: type_name
+          kind: string
+      undo:
+        about: Undo a previous rollout
+        options:
+          allow_missing_template_keys:
+            flag: --allow-missing-template-keys
+            kind: string
+        positionals:
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: type_name
+          kind: string
+  run:
+    about: Run a particular image on the cluster
+    options:
+      allow_missing_template_keys:
+        flag: --allow-missing-template-keys
+        kind: string
+    positionals:
+    - name: name
+      kind: string
+  scale:
+    about: Set a new size for a deployment, replica set, or replication controller
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: type
+      kind: string
+    - name: name
+      kind: string
+  set:
+    about: Set specific features on objects
+    commands:
+      env:
+        about: Update environment variables on a pod template
+        options:
+          all:
+            flag: --all
+            kind: string
+        positionals:
+        - name: resource_name
+          kind: string
+        - name: key_1_val_1
+          kind: string
+        - name: key_n_val_n
+          kind: string
+      image:
+        about: Update the image of a pod template
+        options:
+          all:
+            flag: --all
+            kind: string
+        positionals:
+        - name: f
+          kind: string
+        - name: filename
+          kind: string
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: container_name_1_container_image_1
+          kind: string
+        - name: container_name_n_container_image_n
+          kind: string
+      # hand-authored — probe parse of the usage line was invalid,
+      # config-dropped then re-authored.
+      resources:
+        about: Update resources/limits on objects with pod templates
+        options:
+          limits:
+            flag: --limits
+            kind: string
+            doc: Resource limits, e.g. cpu=200m,memory=512Mi
+          requests:
+            flag: --requests
+            kind: string
+            doc: Resource requests, e.g. cpu=200m,memory=512Mi
+          containers:
+            flag: --containers
+            kind: string
+            doc: Container names, "*" or comma list (-c)
+          all:
+            flag: --all
+            kind: flag
+          dry_run:
+            flag: --dry-run
+            kind: string
+            doc: none|server|client
+          output:
+            flag: --output
+            kind: string
+        positionals:
+        - name: resource
+          kind: string
+          doc: e.g. deployment/nginx
+        rest:
+          name: names
+          kind: string
+      selector:
+        about: Set the selector on a resource
+        options:
+          all:
+            flag: --all
+            kind: string
+        positionals:
+        - name: f
+          kind: string
+        - name: filename
+          kind: string
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: expressions
+          kind: string
+      serviceaccount:
+        about: Update the service account of a resource
+        options:
+          all:
+            flag: --all
+            kind: string
+        positionals:
+        - name: f
+          kind: string
+        - name: filename
+          kind: string
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+        - name: service_account
+          kind: string
+      subject:
+        about: Update the user, group, or service account in a role binding or cluster role binding
+        options:
+          all:
+            flag: --all
+            kind: string
+        positionals:
+        - name: f
+          kind: string
+        - name: filename
+          kind: string
+        - name: type
+          kind: string
+        - name: name
+          kind: string
+  taint:
+    about: Update the taints on one or more nodes
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: node
+      kind: string
+    - name: name
+      kind: string
+    - name: key_1_val_1_taint_effect_1
+      kind: string
+    - name: key_n_val_n_taint_effect_n
+      kind: string
+  top:
+    about: Display resource (CPU/memory) usage
+    commands:
+      node:
+        about: Display resource (CPU/memory) usage of nodes
+        options:
+          no_headers:
+            flag: --no-headers
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+        - name: label
+          kind: string
+      pod:
+        about: Display resource (CPU/memory) usage of pods
+        options:
+          all_namespaces:
+            flag: --all-namespaces
+            kind: string
+        positionals:
+        - name: name
+          kind: string
+        - name: label
+          kind: string
+  uncordon:
+    about: Mark node as schedulable
+    options:
+      dry_run:
+        flag: --dry-run
+        kind: string
+    positionals:
+    - name: node
+      kind: string
+  version:
+    about: Print the client and server version information
+    options:
+      # hand-tuned: `--client` is a boolean flag, not a value option
+      client:
+        flag: --client
+        kind: flag
+  wait:
+    about: Wait for a specific condition on one or many resources
+    options:
+      all:
+        flag: --all
+        kind: string
+    positionals:
+    - name: f
+      kind: string
+    - name: filename
+      kind: string
+    - name: resource_group_resource_name
+      kind: string
+    - name: resource_group
+      kind: string
+    - name: l
+      kind: string
+    - name: label
+      kind: string

@@ -1,0 +1,1336 @@
+# git SDK spec — CORRECTED BASELINE (hand-authored)
+# `git --help` groups commands under prose section headers the
+# probe cannot parse (24 rows dropped -> empty tree). Commands taken
+# from `git help -a` filtered to runnable builtins+installed helpers;
+# every leaf carries `rest: args` so unmodelled flags/subcommands
+# still pass through. Curated `options:` on the high-traffic set.
+name: git
+about: the stupid content tracker
+commands:
+  add:
+    about: "Add file contents to the index"
+    options:
+      all:
+        flag: --all
+        kind: flag
+        doc: "stage modified and deleted files (-A)"
+      update:
+        flag: --update
+        kind: flag
+        doc: "stage tracked modifications only (-u)"
+      patch:
+        flag: --patch
+        kind: flag
+        doc: "interactively choose hunks (-p)"
+      verbose:
+        flag: --verbose
+        kind: flag
+        doc: "be verbose (-v)"
+      force:
+        flag: --force
+        kind: flag
+        doc: "allow adding otherwise-ignored files (-f)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  am:
+    about: "Apply a series of patches from a mailbox"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  annotate:
+    about: "Annotate file lines with commit information"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  apply:
+    about: "Apply a patch to files and/or to the index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  archive:
+    about: "Create an archive of files from a named tree"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  backfill:
+    about: "Download missing objects in a partial clone"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  bisect:
+    about: "Use binary search to find the commit that introduced a bug"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  blame:
+    about: "Show what revision and author last modified each line of a file"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  branch:
+    about: "List, create, or delete branches"
+    options:
+      all:
+        flag: --all
+        kind: flag
+        doc: "list local and remote-tracking branches (-a)"
+      remotes:
+        flag: --remotes
+        kind: flag
+        doc: "list remote-tracking branches (-r)"
+      delete:
+        flag: --delete
+        kind: flag
+        doc: "delete a branch (-d)"
+      move:
+        flag: --move
+        kind: flag
+        doc: "rename a branch (-m)"
+      copy:
+        flag: --copy
+        kind: flag
+        doc: "copy a branch (-c)"
+      force:
+        flag: --force
+        kind: flag
+        doc: "force creation/rename (-f)"
+      show_current:
+        flag: --show-current
+        kind: flag
+        doc: "print the current branch name"
+      verbose:
+        flag: --verbose
+        kind: flag
+        doc: "show upstream and subject (-v)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  bugreport:
+    about: "Collect information for user to file a bug report"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  bundle:
+    about: "Move objects and refs by archive"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  cat-file:
+    about: "Provide contents or details of repository objects"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  check-attr:
+    about: "Display gitattributes information"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  check-ignore:
+    about: "Debug gitignore / exclude files"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  check-mailmap:
+    about: "Show canonical names and email addresses of contacts"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  checkout-index:
+    about: "Copy files from the index to the working tree"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  checkout:
+    about: "Switch branches or restore working tree files"
+    options:
+      branch:
+        flag: --branch
+        kind: string
+        doc: "create and checkout a new branch (-b)"
+      detach:
+        flag: --detach
+        kind: flag
+        doc: "detach HEAD"
+      force:
+        flag: --force
+        kind: flag
+        doc: "throw away local modifications (-f)"
+      track:
+        flag: --track
+        kind: flag
+        doc: "set up tracking (-t)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  check-ref-format:
+    about: "Ensures that a reference name is well formed"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  cherry:
+    about: "Find commits yet to be applied to upstream"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  cherry-pick:
+    about: "Apply the changes introduced by some existing commits"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  citool:
+    about: "Graphical alternative to git-commit"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  clean:
+    about: "Remove untracked files from the working tree"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  clone:
+    about: "Clone a repository into a new directory"
+    options:
+      branch:
+        flag: --branch
+        kind: string
+        doc: "checkout <name> instead of remote HEAD (-b)"
+      depth:
+        flag: --depth
+        kind: int
+        doc: "create a shallow clone of <depth> commits"
+      bare:
+        flag: --bare
+        kind: flag
+        doc: "make a bare repository"
+      mirror:
+        flag: --mirror
+        kind: flag
+        doc: "mirror the source repository"
+      single_branch:
+        flag: --single-branch
+        kind: flag
+        doc: "clone only one branch"
+      recursive:
+        flag: --recursive
+        kind: flag
+        doc: "initialize submodules"
+      quiet:
+        flag: --quiet
+        kind: flag
+        doc: "operate quietly (-q)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  column:
+    about: "Display data in columns"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  commit-graph:
+    about: "Write and verify Git commit-graph files"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  commit:
+    about: "Record changes to the repository"
+    options:
+      message:
+        flag: --message
+        kind: strings
+        doc: "commit message (-m, repeatable)"
+      all:
+        flag: --all
+        kind: flag
+        doc: "stage all tracked changes (-a)"
+      amend:
+        flag: --amend
+        kind: flag
+        doc: "amend the previous commit"
+      no_edit:
+        flag: --no-edit
+        kind: flag
+        doc: "reuse the previous message"
+      verbose:
+        flag: --verbose
+        kind: flag
+        doc: "show diff in editor (-v)"
+      quiet:
+        flag: --quiet
+        kind: flag
+        doc: "suppress summary (-q)"
+      allow_empty:
+        flag: --allow-empty
+        kind: flag
+        doc: "allow an empty commit"
+      signoff:
+        flag: --signoff
+        kind: flag
+        doc: "add Signed-off-by trailer (-s)"
+      no_verify:
+        flag: --no-verify
+        kind: flag
+        doc: "bypass hooks (-n)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  commit-tree:
+    about: "Create a new commit object"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  config:
+    about: "Get and set repository or global options"
+    options:
+      global:
+        flag: --global
+        kind: flag
+        doc: "use the user config file"
+      system:
+        flag: --system
+        kind: flag
+        doc: "use the system config file"
+      local:
+        flag: --local
+        kind: flag
+        doc: "use the repository config file"
+      get:
+        flag: --get
+        kind: flag
+        doc: "get the value for a key"
+      set:
+        flag: --set
+        kind: flag
+        doc: "set the value for a key"
+      unset:
+        flag: --unset
+        kind: flag
+        doc: "remove a key"
+      list:
+        flag: --list
+        kind: flag
+        doc: "list all settings (-l)"
+      add:
+        flag: --add
+        kind: flag
+        doc: "add a new line for a multi-valued key"
+      type:
+        flag: --type
+        kind: string
+        doc: "canonicalize values as <type>"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  count-objects:
+    about: "Count unpacked number of objects and their disk consumption"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  credential-cache:
+    about: "Helper to temporarily store passwords in memory"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  credential-gcloud.sh:
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  credential:
+    about: "Retrieve and store user credentials"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  credential-store:
+    about: "Helper to store credentials on disk"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  cvsserver:
+    about: "A CVS server emulator for Git"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  daemon:
+    about: "A really simple server for Git repositories"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  describe:
+    about: "Give an object a human readable name based on an available ref"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  diagnose:
+    about: "Generate a zip archive of diagnostic information"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  diff-files:
+    about: "Compares files in the working tree and the index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  diff-index:
+    about: "Compare a tree to the working tree or index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  diff-pairs:
+    about: "Compare the content and mode of provided blob pairs"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  diff:
+    about: "Show changes between commits, commit and working tree, etc"
+    options:
+      cached:
+        flag: --cached
+        kind: flag
+        doc: "diff staged changes"
+      stat:
+        flag: --stat
+        kind: flag
+        doc: "generate a diffstat"
+      name_only:
+        flag: --name-only
+        kind: flag
+        doc: "show only file names"
+      name_status:
+        flag: --name-status
+        kind: flag
+        doc: "show names and statuses"
+      patch:
+        flag: --patch
+        kind: flag
+        doc: "generate a patch (-p)"
+      quiet:
+        flag: --quiet
+        kind: flag
+        doc: "silence all output"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  difftool:
+    about: "Show changes using common diff tools"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  diff-tree:
+    about: "Compares the content and mode of blobs found via two tree objects"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  fast-export:
+    about: "Git data exporter"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  fast-import:
+    about: "Backend for fast Git data importers"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  fetch:
+    about: "Download objects and refs from another repository"
+    options:
+      all:
+        flag: --all
+        kind: flag
+        doc: "fetch all remotes"
+      prune:
+        flag: --prune
+        kind: flag
+        doc: "prune deleted remote-tracking refs (-p)"
+      tags:
+        flag: --tags
+        kind: flag
+        doc: "fetch all tags (-t)"
+      depth:
+        flag: --depth
+        kind: int
+        doc: "deepen to <depth> commits"
+      verbose:
+        flag: --verbose
+        kind: flag
+        doc: "be verbose (-v)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  fetch-pack:
+    about: "Receive missing objects from another repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  filter-branch:
+    about: "Rewrite branches"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  filter-repo:
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  fmt-merge-msg:
+    about: "Produce a merge commit message"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  for-each-ref:
+    about: "Output information on each ref"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  for-each-repo:
+    about: "Run a Git command on a list of repositories"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  format-patch:
+    about: "Prepare patches for e-mail submission"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  format-rev:
+    about: "EXPERIMENTAL: Pretty format revisions on demand"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  fsck:
+    about: "Verifies the connectivity and validity of the objects in the database"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  gc:
+    about: "Cleanup unnecessary files and optimize the local repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  get-tar-commit-id:
+    about: "Extract commit ID from an archive created using git-archive"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  grep:
+    about: "Print lines matching a pattern"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  gui:
+    about: "A portable graphical interface to Git"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  hash-object:
+    about: "Compute object ID and optionally create an object from a file"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  help:
+    about: "Display help information about Git"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  history:
+    about: "EXPERIMENTAL: Rewrite history"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  hook:
+    about: "Run Git hooks"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  http-backend:
+    about: "Server side implementation of Git over HTTP"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  imap-send:
+    about: "Send a collection of patches from stdin to an IMAP folder"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  index-pack:
+    about: "Build pack index file for an existing packed archive"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  init:
+    about: "Create an empty Git repository or reinitialize an existing one"
+    options:
+      bare:
+        flag: --bare
+        kind: flag
+        doc: "create a bare repository"
+      initial_branch:
+        flag: --initial-branch
+        kind: string
+        doc: "name for the initial branch (-b)"
+      quiet:
+        flag: --quiet
+        kind: flag
+        doc: "be quiet (-q)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  instaweb:
+    about: "Instantly browse your working repository in gitweb"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  interpret-trailers:
+    about: "Add or parse structured information in commit messages"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  last-modified:
+    about: "EXPERIMENTAL: Show when files were last modified"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  log:
+    about: "Show commit logs"
+    options:
+      oneline:
+        flag: --oneline
+        kind: flag
+        doc: "condense each commit to one line"
+      patch:
+        flag: --patch
+        kind: flag
+        doc: "show the diff (-p)"
+      stat:
+        flag: --stat
+        kind: flag
+        doc: "generate a diffstat"
+      graph:
+        flag: --graph
+        kind: flag
+        doc: "draw the branch topology"
+      all:
+        flag: --all
+        kind: flag
+        doc: "include all refs"
+      follow:
+        flag: --follow
+        kind: flag
+        doc: "follow file history across renames"
+      decorate:
+        flag: --decorate
+        kind: flag
+        doc: "print ref names"
+      pretty:
+        flag: --pretty
+        kind: string
+        doc: "pretty-print format"
+      format:
+        flag: --format
+        kind: string
+        doc: "pretty-print format"
+      max_count:
+        flag: --max-count
+        kind: int
+        doc: "limit commits (-n)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  ls-files:
+    about: "Show information about files in the index and the working tree"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  ls-remote:
+    about: "List references in a remote repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  ls-tree:
+    about: "List the contents of a tree object"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  mailinfo:
+    about: "Extracts patch and authorship from a single e-mail message"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  mailsplit:
+    about: "Simple UNIX mbox splitter program"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  maintenance:
+    about: "Run tasks to optimize Git repository data"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  merge-base:
+    about: "Find as good common ancestors as possible for a merge"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  merge-file:
+    about: "Run a three-way file merge"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  merge-index:
+    about: "Run a merge for files needing merging"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  merge:
+    about: "Join two or more development histories together"
+    options:
+      no_ff:
+        flag: --no-ff
+        kind: flag
+        doc: "always create a merge commit"
+      ff_only:
+        flag: --ff-only
+        kind: flag
+        doc: "refuse unless fast-forward"
+      squash:
+        flag: --squash
+        kind: flag
+        doc: "produce a squashed working tree, no commit"
+      abort:
+        flag: --abort
+        kind: flag
+        doc: "abort the in-progress merge"
+      message:
+        flag: --message
+        kind: string
+        doc: "merge commit message (-m)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  merge-one-file:
+    about: "The standard helper program to use with git-merge-index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  mergetool:
+    about: "Run merge conflict resolution tools to resolve merge conflicts"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  merge-tree:
+    about: "Perform merge without touching index or working tree"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  mktag:
+    about: "Creates a tag object with extra validation"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  mktree:
+    about: "Build a tree-object from ls-tree formatted text"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  multi-pack-index:
+    about: "Write and verify multi-pack-indexes"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  mv:
+    about: "Move or rename a file, a directory, or a symlink"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  name-rev:
+    about: "Find symbolic names for given revs"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  notes:
+    about: "Add or inspect object notes"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  p4:
+    about: "Import from and submit to Perforce repositories"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  pack-objects:
+    about: "Create a packed archive of objects"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  pack-redundant:
+    about: "Find redundant pack files"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  pack-refs:
+    about: "Pack heads and tags for efficient repository access"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  patch-id:
+    about: "Compute unique IDs for patches"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  prune-packed:
+    about: "Remove extra objects that are already in pack files"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  prune:
+    about: "Prune all unreachable objects from the object database"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  pull:
+    about: "Fetch from and integrate with another repository or a local branch"
+    options:
+      rebase:
+        flag: --rebase
+        kind: flag
+        doc: "rebase after fetching"
+      ff_only:
+        flag: --ff-only
+        kind: flag
+        doc: "refuse unless fast-forward"
+      all:
+        flag: --all
+        kind: flag
+        doc: "fetch all remotes"
+      tags:
+        flag: --tags
+        kind: flag
+        doc: "fetch all tags (-t)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  push:
+    about: "Update remote refs along with associated objects"
+    options:
+      set_upstream:
+        flag: --set-upstream
+        kind: flag
+        doc: "set upstream for pushed refs (-u)"
+      force:
+        flag: --force
+        kind: flag
+        doc: "force update (-f)"
+      force_with_lease:
+        flag: --force-with-lease
+        kind: flag
+        doc: "force, unless upstream changed"
+      delete:
+        flag: --delete
+        kind: flag
+        doc: "delete a remote ref"
+      tags:
+        flag: --tags
+        kind: flag
+        doc: "push all tags"
+      dry_run:
+        flag: --dry-run
+        kind: flag
+        doc: "do everything except send"
+      verbose:
+        flag: --verbose
+        kind: flag
+        doc: "be verbose (-v)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  quiltimport:
+    about: "Applies a quilt patchset onto the current branch"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  range-diff:
+    about: "Compare two commit ranges (e.g. two versions of a branch)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  read-tree:
+    about: "Reads tree information into the index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  rebase:
+    about: "Reapply commits on top of another base tip"
+    options:
+      interactive:
+        flag: --interactive
+        kind: flag
+        doc: "interactive rebase (-i)"
+      onto:
+        flag: --onto
+        kind: string
+        doc: "rebase onto <branch>"
+      continue:
+        flag: --continue
+        kind: flag
+        doc: "continue after resolving conflicts"
+      abort:
+        flag: --abort
+        kind: flag
+        doc: "abort the in-progress rebase"
+      skip:
+        flag: --skip
+        kind: flag
+        doc: "skip the current patch"
+      autosquash:
+        flag: --autosquash
+        kind: flag
+        doc: "squash fixup commits automatically"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  reflog:
+    about: "Manage reflog information"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  refs:
+    about: "Low-level access to refs"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  remote:
+    about: "Manage set of tracked repositories"
+    options:
+      verbose:
+        flag: --verbose
+        kind: flag
+        doc: "be verbose (-v)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  repack:
+    about: "Pack unpacked objects in a repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  replace:
+    about: "Create, list, delete refs to replace objects"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  replay:
+    about: "EXPERIMENTAL: Replay commits on a new base, works with bare repos too"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  repo:
+    about: "Retrieve information about the repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  request-pull:
+    about: "Generates a summary of pending changes"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  rerere:
+    about: "Reuse recorded resolution of conflicted merges"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  reset:
+    about: "Set `HEAD` or the index to a known state"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  restore:
+    about: "Restore working tree files"
+    options:
+      staged:
+        flag: --staged
+        kind: flag
+        doc: "restore the index (-S)"
+      worktree:
+        flag: --worktree
+        kind: flag
+        doc: "restore the working tree (-W)"
+      source:
+        flag: --source
+        kind: string
+        doc: "restore from <tree> (-s)"
+      patch:
+        flag: --patch
+        kind: flag
+        doc: "interactively choose hunks (-p)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  revert:
+    about: "Revert some existing commits"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  rev-list:
+    about: "Lists commit objects in reverse chronological order"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  rev-parse:
+    about: "Pick out and massage parameters"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  rm:
+    about: "Remove files from the working tree and from the index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  send-pack:
+    about: "Push objects over Git protocol to another repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  shortlog:
+    about: "Summarize `git log` output"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  show-branch:
+    about: "Show branches and their commits"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  show-index:
+    about: "Show packed archive index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  show-ref:
+    about: "List references in a local repository"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  show:
+    about: "Show various types of objects"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  sparse-checkout:
+    about: "Reduce your working tree to a subset of tracked files"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  stash:
+    about: "Stash the changes in a dirty working directory away"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  status:
+    about: "Show the working tree status"
+    options:
+      short:
+        flag: --short
+        kind: flag
+        doc: "short format (-s)"
+      branch:
+        flag: --branch
+        kind: flag
+        doc: "show branch and tracking info (-b)"
+      porcelain:
+        flag: --porcelain
+        kind: flag
+        doc: "machine-readable output"
+      long:
+        flag: --long
+        kind: flag
+        doc: "long format (default)"
+      untracked_files:
+        flag: --untracked-files
+        kind: string
+        doc: "untracked files mode (-u)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  stripspace:
+    about: "Remove unnecessary whitespace"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  submodule:
+    about: "Initialize, update or inspect submodules"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  svn:
+    about: "Bidirectional operation between a Subversion repository and Git"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  switch:
+    about: "Switch branches"
+    options:
+      create:
+        flag: --create
+        kind: string
+        doc: "create and switch to a new branch (-c)"
+      detach:
+        flag: --detach
+        kind: flag
+        doc: "detach HEAD"
+      force_create:
+        flag: --force-create
+        kind: string
+        doc: "create/reset a branch (-C)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  symbolic-ref:
+    about: "Read, modify and delete symbolic refs"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  tag:
+    about: "Create, list, delete or verify tags"
+    options:
+      annotate:
+        flag: --annotate
+        kind: flag
+        doc: "annotated tag (-a)"
+      message:
+        flag: --message
+        kind: string
+        doc: "tag message (-m)"
+      delete:
+        flag: --delete
+        kind: flag
+        doc: "delete tags (-d)"
+      list:
+        flag: --list
+        kind: flag
+        doc: "list tags (-l)"
+      force:
+        flag: --force
+        kind: flag
+        doc: "replace an existing tag (-f)"
+      sign:
+        flag: --sign
+        kind: flag
+        doc: "GPG-sign the tag (-s)"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  unpack-file:
+    about: "Creates a temporary file with a blob's contents"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  unpack-objects:
+    about: "Unpack objects from a packed archive"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  update-index:
+    about: "Register file contents in the working tree to the index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  update-ref:
+    about: "Update the object name stored in a ref safely"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  update-server-info:
+    about: "Update auxiliary info file to help dumb servers"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  url-parse:
+    about: "Parse and extract git URL components"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  var:
+    about: "Show a Git logical variable"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  verify-commit:
+    about: "Check the GPG signature of commits"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  verify-pack:
+    about: "Validate packed Git archive files"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  verify-tag:
+    about: "Check the GPG signature of tags"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  version:
+    about: "Display version information about Git"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  whatchanged:
+    about: "Show logs with differences each commit introduces"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  worktree:
+    about: "Manage multiple working trees"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
+  write-tree:
+    about: "Create a tree object from the current index"
+    rest:
+      name: args
+      kind: string
+      doc: "extra argv passed through verbatim"
