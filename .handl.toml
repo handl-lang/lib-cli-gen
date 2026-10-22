@@ -8,6 +8,11 @@
 cli = { path = "../lib-cli/src/cli" }
 cli-c = { path = "../lib-cli/src/cli-c" }
 
+# stdout composition (see README §Composing output): `json` resolves
+# through the host module chain; `str-handl` maps to the pure-Handl
+# `str` impl repo.
+str-handl = { path = "../lib-str-handl/src" }
+
 aws = { path = "generated/aws" }
 aws-cli-host = { path = "generated/aws-cli-host" }
 docker = { path = "generated/docker" }

@@ -36,6 +36,36 @@ The committed source of truth is:
   only — no daemon), `ffmpeg -version`, `kubectl version --client`
   (no cluster), `aws --version`.
 
+## Composing output
+
+Adapters return `Result<Output, Spawn>`; `Output.stdout`/`stderr` are
+plain `String`s. Commands stamped `meta:json-capable` get a
+`--- json-capable` doc comment in the generated adapter — that's the
+hint that stdout under `--json`/`--format`/`--output` is
+machine-readable. Parse it by composing **free pure arrows**, not
+methods on `Output` — `x.json()`-style adapters were rejected: not
+composable, not treeshakeable, and they would hide the `~>` purity
+line.
+
+```handl
+from "json" import { parse }          -- lib-json:  String ~> Value
+from "str-handl" import { lines }     -- str-handl: String ~> [String]
+
+r := gh_config_list()                  -- generated adapter → ok Output
+v := parse(tag.untag(r).value.stdout)  -- `--json` stdout → Value
+ls := lines(tag.untag(r).value.stdout) -- line-oriented stdout → lines
+```
+
+`json` resolves through the host module chain (kit-stdlib registers
+it); `str-handl` is mapped in `.handl.toml` next to `cli`/`cli-c`.
+
+`parse` is lenient: `""`/garbage/unclosed input returns `null`, as
+does junk trailing a complete value. A stray unmatched closer
+(`}`/`]`) with an empty frame stack *raises* an eval error
+(`match: no arm matched`) — not an `err`-tagged `Result` — so guard
+the call when the text is untrusted; under a `--json` flag you
+requested, compose directly.
+
 ## Regenerating a spec from a live tool
 
 ```bash
