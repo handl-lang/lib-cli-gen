@@ -2,4 +2,4 @@ from "generated/docker-cli-host/docker" import * as m
 
 --- smoke: `docker version --format` renders client info only, so it
 --- never touches the daemon (safe when dockerd is down).
-test_version := assert tag.untag(m.docker_version({ format: "{{.Client.Version}}" })).value.code = 0
+test_version := assert m.docker_version({ format: "{{.Client.Version}}" }).value.code = 0
