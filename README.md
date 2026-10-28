@@ -91,3 +91,7 @@ HNL=/path/to/hnl scripts/hnl-gate.sh
 
 Runtime dep: `lib-cli` (`cli` port + `cli-c` backend) — mapped in
 `.handl.toml`.
+
+## License
+
+MIT.
