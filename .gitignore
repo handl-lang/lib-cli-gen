@@ -1,3 +1,6 @@
 generated/
 Cargo.lock
 target/
+
+# myco worktree mount point (created by `myco init`)
+project/
