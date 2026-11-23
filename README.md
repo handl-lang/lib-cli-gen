@@ -6,8 +6,9 @@ For each tool, `hnl sdkgen cli` emits two modules:
 
 - `generated/<tool>/<tool>.hnl` — the **port** (types + arrow signatures,
   `cli`/`cli-c` contract)
-- `generated/<tool>-cli-host/<tool>.hnl` — the **adapter** over
-  `lib-cli`'s `cli-c` (posix_spawnp, no shell), a sibling dir of the port
+- `generated/<tool>/<tool>-cli-host/<tool>.hnl` — the **adapter**
+  over `lib-cli`'s `cli-c` (posix_spawnp, no shell), nested inside the
+  port dir (PL-004 `ArtifactRef` layout)
 
 ## Committed source vs. generated output
 

@@ -1,4 +1,4 @@
-from "generated/aws-cli-host/aws" import * as m
+from "generated/aws/aws-cli-host/aws" import * as m
 
 --- smoke: `aws --version` — root leaf takes (opts, parameters); no
 --- credentials or network needed for the version flag.

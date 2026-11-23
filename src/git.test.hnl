@@ -1,4 +1,4 @@
-from "generated/git-cli-host/git" import * as m
+from "generated/git/git-cli-host/git" import * as m
 
 --- smoke: real `git` invocations through the generated adapter.
 --- Local-safe only — no repo, network or auth requirements.

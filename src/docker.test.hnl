@@ -1,4 +1,4 @@
-from "generated/docker-cli-host/docker" import * as m
+from "generated/docker/docker-cli-host/docker" import * as m
 
 --- smoke: `docker version --format` renders client info only, so it
 --- never touches the daemon (safe when dockerd is down).

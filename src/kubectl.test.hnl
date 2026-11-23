@@ -1,4 +1,4 @@
-from "generated/kubectl-cli-host/kubectl" import * as m
+from "generated/kubectl/kubectl-cli-host/kubectl" import * as m
 
 --- smoke: `kubectl version --client` — client-only, no cluster contact.
 test_version := assert m.kubectl_version({ client: true }).value.code = 0

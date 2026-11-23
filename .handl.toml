@@ -14,12 +14,12 @@ cli-c = { path = "../lib-cli/src/cli-c" }
 str-handl = { path = "../lib-str-handl/src" }
 
 aws = { path = "generated/aws" }
-aws-cli-host = { path = "generated/aws-cli-host" }
+aws-cli-host = { path = "generated/aws/aws-cli-host" }
 docker = { path = "generated/docker" }
-docker-cli-host = { path = "generated/docker-cli-host" }
+docker-cli-host = { path = "generated/docker/docker-cli-host" }
 ffmpeg = { path = "generated/ffmpeg" }
-ffmpeg-cli-host = { path = "generated/ffmpeg-cli-host" }
+ffmpeg-cli-host = { path = "generated/ffmpeg/ffmpeg-cli-host" }
 git = { path = "generated/git" }
-git-cli-host = { path = "generated/git-cli-host" }
+git-cli-host = { path = "generated/git/git-cli-host" }
 kubectl = { path = "generated/kubectl" }
-kubectl-cli-host = { path = "generated/kubectl-cli-host" }
+kubectl-cli-host = { path = "generated/kubectl/kubectl-cli-host" }
