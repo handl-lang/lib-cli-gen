@@ -24,8 +24,8 @@ fi
 # the gate covers the current specs, not stale artifacts.
 for s in specs/*.clispec.yaml; do
   t="$(basename "$s" .clispec.yaml)"
-  echo "== hnl sdkgen cli $s --output $GEN_DIR/$t =="
-  "$HNL" sdkgen cli "$s" --output "$GEN_DIR/$t"
+  echo "== hnl codegen cli $s --output $GEN_DIR/$t =="
+  "$HNL" codegen cli "$s" --output "$GEN_DIR/$t"
 done
 
 scan_dirs=("$SRC_DIR")

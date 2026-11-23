@@ -6,12 +6,12 @@
 --- `lib-cli`'s `cli-c` (posix_spawnp, no shell). Committed source is
 --- `specs/*.clispec.yaml` + `src/*.test.hnl`; `generated/` is a
 --- gitignored build artifact — `scripts/hnl-gate.sh` regenerates it
---- via `hnl sdkgen cli` before gating.
+--- via `hnl codegen cli` before gating.
 {
   modules: ["aws", "aws-cli-host", "docker", "docker-cli-host", "ffmpeg", "ffmpeg-cli-host", "git", "git-cli-host", "kubectl", "kubectl-cli-host"],
   name: "cli-gen",
   description: "Generated handl SDKs for installed CLIs (git, docker, ffmpeg, kubectl, aws).",
   license: "MIT",
-  keywords: ["cli", "sdkgen", "generated", "sdk"],
+  keywords: ["cli", "codegen", "generated", "sdk"],
   homepage: "https://github.com/handl-lang/lib-cli-gen",
 }
