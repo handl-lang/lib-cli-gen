@@ -6,7 +6,7 @@
 
 [[repos]]
 name = "handl-lang/lib-cli-gen"
-dir = "/home/luis/GitHub/handl-lang/lib-cli-gen"
+dir = "~//GitHub/handl-lang/lib-cli-gen"
 branch = "refs/heads/main"
   [repos.runner]
   kind = "script"
