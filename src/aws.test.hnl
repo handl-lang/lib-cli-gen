@@ -2,4 +2,4 @@ from "generated/aws/aws-cli-host/aws" import * as m
 
 --- smoke: `aws --version` — root leaf takes (opts, parameters); no
 --- credentials or network needed for the version flag.
-test_version := assert m.aws({ version: true }, []).value.code = 0
+test_version := assert m.aws({ version: true }, []).value.code == 0
