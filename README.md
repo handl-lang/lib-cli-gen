@@ -83,7 +83,7 @@ Then hand-tune the emitted spec and regenerate as above.
 ## Gate
 
 ```bash
-./ci.sh        # or: scripts/hnl-gate.sh
+HNL=../host-cli/target/debug/hnl scripts/hnl-gate.sh  # or: scripts/hnl-gate.sh
 HNL=/path/to/hnl scripts/hnl-gate.sh
 ```
 
