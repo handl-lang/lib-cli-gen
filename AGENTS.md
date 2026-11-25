@@ -28,7 +28,7 @@ the generated code.
 
 ```bash
 HNL=../host-cli/target/debug/hnl scripts/hnl-gate.sh
-# or: ./ci.sh (bupha entry where present)
+# or: workflows/gate.yaml (bupha entry)
 ```
 
 <!-- myco:agent-awareness -->
